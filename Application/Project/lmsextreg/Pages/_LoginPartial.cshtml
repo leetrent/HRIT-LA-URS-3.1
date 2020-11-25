@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@if (SignInManager.IsSignedIn(User)
+        && (await AuthorizationService.AuthorizeAsync(User, "CanAccessProfileLink")).Succeeded)
+{
+    @if ((await AuthorizationService.AuthorizeAsync(User, "CanAccessProfileLink")).Succeeded)
+    {
+        <ul class="nav navbar-nav navbar-right justify-content-center">
+            <li class="nav-item my-auto">
+                <a class="nav-link urs-nav-link" href="#" title="UserName">@UserManager.GetUserName(User)</a>
+            </li>
+            <li class="nav-item my-auto">
+                <form class="form-inline" asp-page="/Account/Logout" method="post">
+                    <button type="submit" class="btn btn-link navbar-btn nav-link my-auto urs-nav-link">Logout</button>
+                </form>
+            </li>
+        </ul>
+    }    
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item"><a class="nav-link urs-nav-link" asp-page="/Account/Register">Register</a></li>
+        <li class="nav-item"><a class="nav-link urs-nav-link" asp-page="/Account/Login">Log in</a></li>
+    </ul>
+}

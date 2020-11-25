@@ -1,0 +1,15 @@
+@page
+@model LoginPrepModel
+
+<section>
+   <form id="loginPrepForm" class="form-inline" asp-page="/Account/LoginRequired" method="post">
+       <button type="submit" class="btn btn-link navbar-btn nav-link my-auto urs-nav-link">Logout</button>
+   </form>
+</section>
+
+@section Scripts {
+   @await  Html.PartialAsync("_ValidationScriptsPartial")
+   <script>
+       document.getElementById("loginPrepForm").submit();
+   </script>  
+}

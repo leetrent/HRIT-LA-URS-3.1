@@ -1,0 +1,51 @@
+@page
+@model lmsextreg.Pages.Enrollments.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Program Enrollment</h2>
+<h4>Select the program that you would like to enroll in.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--
+            <div class="form-group">
+                <label asp-for="ProgramEnrollment.LMSProgramID" class="control-label"></label>
+                <select asp-for="ProgramEnrollment.LMSProgramID" class ="form-control" asp-items="ViewBag.LMSProgramID"></select>
+            </div>
+            -->
+            @if ( @Model.ShowProgramDropdown )
+            {
+                <div class="form-group">
+                    <label asp-for="Input.LMSProgramID"></label>:
+                    <select asp-for="Input.LMSProgramID" class="form-control"
+                            asp-items="@Model.ProgramSelectList">
+                        <option value="">-- Select Program --</option>
+                    </select>
+                    <span asp-validation-for="Input.LMSProgramID" class="text-danger">
+                    </span>
+                </div> 
+                <div class="form-group">
+                    <label    asp-for="Input.Remarks"></label>:
+                    <textarea asp-for="Input.Remarks" class="form-control" style="margin-top:0px;" rows="3" cols="40"></textarea>
+                </div>                
+            }
+            <div class="form-group">
+                <input type="submit" value="Request to Enroll" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

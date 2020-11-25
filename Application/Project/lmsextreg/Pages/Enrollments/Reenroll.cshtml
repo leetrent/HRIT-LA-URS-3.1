@@ -1,0 +1,27 @@
+@page "{id:int}"
+@model lmsextreg.Pages.Enrollments.ReenrollModel
+
+@{
+    ViewData["Title"] = "Re-enrollment";
+}
+
+<h2>Program Re-enrollment</h2> 
+<div style="width:50%">
+    <hr />  
+    <span style="font-weight:bold;font-size:medium;">@Html.DisplayNameFor(model => model.ProgramEnrollment.LMSProgram):</span>
+    <span>&nbsp;</span> 
+    <span style="font-weight:normal;font-size:medium;">@Html.DisplayFor(model => model.ProgramEnrollment.LMSProgram.LongName)</span>
+
+    <form method="post">
+            <div class="form-group">
+                <label    asp-for="Input.Remarks"></label>:
+                <textarea asp-for="Input.Remarks" class="form-control" style="margin-top:0;" rows="3" cols="40"></textarea>
+            </div>        
+            <input type="hidden" asp-for="ProgramEnrollment.LMSProgramID" />
+            <input type="hidden" asp-for="ProgramEnrollment.StudentUserId" />
+            <div class="form-group">
+                <input type="submit" value="Re-enroll" class="btn btn-primary" style="margin-top:0px;" /> 
+            </div>    
+    </form>
+     <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,79 @@
+* {
+    font-size: 14px;
+ }
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+#footer-bar h3 {
+    color: #004f87;
+    padding: 68px 0 0 77px;
+    background: url(https://www.gsa.gov/sites/gsa.gov/templates/resources/images/footer-logo.png) no-repeat -1px 97%;
+    background-size: auto 70px;
+    font-size: 17px;
+    border: none;
+}
+
+.pull-right {
+    float: right !important;
+    padding: 68px 0 0 77px;
+    margin-right: 20px;
+}
+
+div .display-inline {
+    display: inline-block;
+}
+
+.img-responsive {
+     max-width: 100%;
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+h2, .h2 { font-size: 30px; }
+h4, .h4 { font-size: 18px; }
+li {font-size: 14px;} 
+label {font-weight:bold;}
+
+.detailsDT {text-align:right;}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}

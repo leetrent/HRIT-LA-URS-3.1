@@ -1,0 +1,329 @@
+* {
+    font-size: 14px;
+ }
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+
+    padding-top:12.5px;
+    background-color:#333333;
+
+    color: #004f87;
+    /* color: red; */
+
+    /* background-color:red; */
+}
+
+
+/* .btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+} */
+
+/* .btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #006db6;
+    border-color: #006db6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #006db6;
+    border-color: #006db6;
+} */
+
+/* a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+} */
+
+
+a {
+    color: #af3639;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #004f87;
+    /* color:red;
+    color: #333; */
+    font-size: large;
+}
+
+div.urs-body-content {
+    width:90%;
+    min-height: 65vh;
+    margin-top:15px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: large;
+}
+
+
+div.urs-outer-container {
+    width:80%;
+    margin: 7px auto; 
+    background-color:#FFF;
+}
+
+.urs-navbar {
+    width:100%;
+    min-height: 7vh;
+    background-color:#e0e6eb;
+    border-bottom: 4px solid #af3639;
+}
+
+.urs-navbar-brand {
+    margin-right:0px;
+}
+
+.urs-nav-link-brand {
+    color:#004f87 !important;
+    padding-top:19px;
+    font-weight:bold;
+    font-size:medium;
+}
+
+.urs-nav-link {
+    color:#004f87 !important;
+    padding-top:19px;
+    font-size:medium;
+}
+
+h3.footer-logo {
+    color: #004f87;
+    padding: 68px 0 0 77px;
+    background: url(https://www.gsa.gov/sites/gsa.gov/templates/resources/images/footer-logo.png) no-repeat -1px 97%;
+    background-size: auto 70px;
+    /* font-size: 17px; */
+    font-size: large;
+    font-weight: bold;
+    border: none;
+}
+
+.img-responsive {
+     max-width: 100%;
+    height: auto;
+} 
+
+.display-inline {
+    display: inline-block;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* p.urs-instructions {
+    color:#af3639;
+    text-align: center;
+}
+
+a.urs-instructions {
+    color:#004f87;
+    padding:5px; 
+    border: 1px solid #006db6;
+} */
+
+p.urs-instructions {
+    color:#006db6;
+    text-align: center;
+    /* font-style: italic; */
+    margin-top: 1.4rem;
+   /* color: red; */
+}
+
+a.urs-link {
+    color:#af3639;
+    padding: 7.5px; 
+}
+
+a.urs-link-box {
+    color:#af3639;
+    padding: 5.5px; 
+    border: 1px solid #af3639;
+}
+
+a.urs-error-box {
+    color:#004f87;
+    padding: 5px; 
+    border: 1px solid #004f87;
+}
+.urs_error_text {
+    color:#af3639;
+}
+
+.urs-welcome-title {
+    color: #006db6;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.urs-program-title {
+    color: #006db6;
+    margin-top: 2rem;
+}
+.urs-program-text {
+    color:#004f87;
+}
+.urs-welcome-text {
+    color:#004f87;
+}
+
+a.program-link {
+    color:#af3639;
+}
+
+footer {
+    width:100%;
+    min-height: 11vh;
+    background-color:#e0e6eb;
+    /* padding-bottom: 10px; */
+    border-top: 4px solid #af3639;
+
+    /* background-color: yellow;     */
+}
+/* ul.footer-links {
+    list-style-type: none;
+    background-color: red;
+} */
+/* ul.footer-links {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+    background-color: yellow;
+    width: 100%;
+    text-align: center;
+  } */
+  
+  /* ul.footer-links li {
+    float: left;
+  } */
+  
+  /* ul.footer-links li a {
+    display: inline-block;
+    color: #004f87;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+  } */
+
+  ul.footer-links {
+    list-style-type: none;
+    margin: 0;
+    margin-top: 1px;
+    padding: 0;
+    /* text-align: center; */
+    text-align: right;
+    /* text-align: center; */
+  }
+
+  ul.footer-links li {
+    display: inline;
+    margin-right: 1px;
+  }
+
+  ul.footer-links li a {
+    color:#004f87;
+    font-size: small;
+  }
+
+div.footer-outer-div { 
+    width: 100%;
+    height: 125px;   
+    /* padding: 0; 
+    padding-top: 25px; */
+
+    height: 110px;  
+    height: 100px;   
+    padding-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+
+    /* background-color: pink; */
+}
+
+div.footer-inner-div-left {
+    width: 50%;
+    float:left;
+    padding-left: 1rem;
+
+    /* height: 100%; */
+    /* background-color: lightgreen; */
+}
+
+div.footer-inner-div-right {
+    width: 50%;
+    float:right;
+    padding-right: 1rem;
+    text-align: right; 
+    padding-top: 68px;
+    
+    /* height: 100%;  */
+
+    /* background-color: lightblue; */
+}
+
+button.urs-btn-primary {
+    color: #FFF;
+    background-color: #006db6;
+    border-color:  #006db6;
+}
+
+p.urs-link-paragraph {
+    margin-top: 25px;
+}
+
+h2, .h2 { font-size: 30px; }
+h4, .h4 { font-size: 18px; }
+li {font-size: 14px;} 
+label {font-weight:bold;}
+
+.detailsDT {text-align:right;}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}

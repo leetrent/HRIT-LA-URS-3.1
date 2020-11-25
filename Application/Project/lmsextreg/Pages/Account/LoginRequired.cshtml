@@ -1,0 +1,11 @@
+@page
+@model LoginRequiredModel
+
+@{
+    ViewData["Title"] = "Log-in Required";
+}
+
+<header>
+    <h1>@ViewData["Title"]</h1>
+    <p>You must login to access the requested page:&nbsp;<a class="h4 urs-link-box" asp-page="/Account/Login">Log-in</a></p>
+</header>

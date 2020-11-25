@@ -1,0 +1,12 @@
+---
+applications:
+- name: extlms
+  buildpack: https://github.com/cloudfoundry/dotnet-core-buildpack.git#v2.0.6
+  random-route: false
+  memory: 512M
+  env:
+    DOTNET_CLI_TELEMETRY_OPTOUT: 1
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    ASPNETCORE_ENVIRONMENT: Development
+services:
+ - extlmsdb

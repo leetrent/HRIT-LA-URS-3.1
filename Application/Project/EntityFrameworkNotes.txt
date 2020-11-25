@@ -1,0 +1,12 @@
+Method 'get_Info' in type 'MySql.Data.EntityFrameworkCore.Infraestructure.MySQLOptionsExtension' 
+from assembly 'MySql.Data.EntityFrameworkCore' does not have an implementation
+
+https://github.com/dotnet/efcore/issues/17788
+
+EF Core - Database Providers
+https://docs.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli
+
+UseMySQL extension method is missing in DbContextOptionsBuilder #231
+https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/issues/231
+
+https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/blob/302ff5db432373ee2091b3f471f9f64bf4ddb4fb/test/Pomelo.EntityFrameworkCore.MySql.PerfTests/Startup.cs#L56-L60

@@ -1,0 +1,10 @@
+From the command line (Windows/Mac/Linux):
+    dotnet publish -c release -r rhel-x64
+
+From File Explorer (Windows):
+    cd lmsextreg\bin\Release\netcoreapp2.1\rhel-x64\
+    Compress (zip) the "publish" folder
+    Rename publish.zip to LMS.zip
+    
+Updload lmsextreg.zip (Windows) or lmsextreg.tar.gz (Mac/Linux) to:
+\\e04tcv-CIFS02.ent.ds.gsa.gov\OCIO\DevDotNet\LMS\LMS-DEV

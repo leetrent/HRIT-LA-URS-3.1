@@ -1,0 +1,39 @@
+﻿@page
+@model TechSupportModel
+@{
+    ViewData["Title"] = "Technical Support";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+<div class="card w-75 mt-4">
+    <div class="card-header h3">User Guide</div>
+    <div class="card-body pb-1">
+        <h5 class="card-title">Please use our user guide to learn how to:</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Complete your registration on this site.</li>
+            <li class="list-group-item">Request to enroll in a Learning Academy program.</li>
+        </ul>
+    </div>
+    <div class="card-footer">
+        <!-- <a href="#" class="btn btn-primary">User Guide</a> -->
+        <!-- <a href="~/pdf/UserGuide.pdf" class="h4 text-primary" target="_blank" >User Guide</a>-->
+        <a href="~/pdf/UserGuide.pdf" class="btn btn-primary" target="_blank">User Guide</a>
+    </div>
+</div>
+<div class="card w-75 mt-5">
+    <div class="card-header h3">Program Support</div>
+    <div class="card-body pb-1">
+        <h5 class="card-title">Please navigate to the Program Support page is you have questions pertaining to a program that you're interested in enrolling in.</h5>
+    </div>
+    <div class="card-footer bg-white">
+        <a asp-page="/ProgramSupport" target="_blank" class="btn btn-primary">Program Support</a>
+    </div>
+</div>
+<div class="card w-75 mt-5">
+    <div class="card-header h3">Tech Support</div>
+    <div class="card-body pb-1">
+        <h5 class="card-title">Please contact our Tech Support team if you're encountering any issues using this site.</h5>
+    </div>
+    <div class="card-footer">
+        <a href="mailto:GSALearningAcademy@gsa.gov" target="_blank" class="text-primary font-weight-bold">GSALearningAcademy@gsa.gov</a>
+    </div>
+</div>

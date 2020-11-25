@@ -1,0 +1,20 @@
+CREATE TABLE `ProgramEnrollment` (
+  `ProgramEnrollmentID` int(11) NOT NULL AUTO_INCREMENT,
+  `LMSProgramID` int(11) NOT NULL,
+  `StudentUserId` varchar(767) NOT NULL,
+  `ApproverUserId` varchar(767) DEFAULT NULL,
+  `StatusCode` varchar(767) NOT NULL,
+  `UserCreated` text NOT NULL,
+  `DateCreated` datetime NOT NULL,
+  `UserLastUpdated` text,
+  `DateLastUpdated` datetime NOT NULL,
+  PRIMARY KEY (`ProgramEnrollmentID`),
+  UNIQUE KEY `IX_ProgramEnrollment_LMSProgramID_StudentUserId` (`LMSProgramID`,`StudentUserId`),
+  KEY `IX_ProgramEnrollment_ApproverUserId` (`ApproverUserId`),
+  KEY `IX_ProgramEnrollment_StatusCode` (`StatusCode`),
+  KEY `IX_ProgramEnrollment_StudentUserId` (`StudentUserId`),
+  CONSTRAINT `FK_ProgramEnrollment_AspNetUsers_ApproverUserId` FOREIGN KEY (`ApproverUserId`) REFERENCES `AspNetUsers` (`Id`),
+  CONSTRAINT `FK_ProgramEnrollment_AspNetUsers_StudentUserId` FOREIGN KEY (`StudentUserId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_ProgramEnrollment_EnrollmentStatus_StatusCode` FOREIGN KEY (`StatusCode`) REFERENCES `EnrollmentStatus` (`StatusCode`) ON DELETE CASCADE,
+  CONSTRAINT `FK_ProgramEnrollment_LMSProgram_LMSProgramID` FOREIGN KEY (`LMSProgramID`) REFERENCES `LMSProgram` (`LMSProgramID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

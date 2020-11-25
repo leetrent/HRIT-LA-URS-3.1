@@ -1,0 +1,103 @@
+@page
+@model lmsextreg.Pages.Enrollments.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h3 style="margin-bottom: 2px;">@Model.LoggedInUser.FullName</h3>
+<h4 style="margin-top: 2px;">Programs Enrollments</h4>
+
+<!-- @if ( @Model.ProgramsAreAvailable )
+{
+    <p style="margin-top: 2px;">
+        <a class="urs-link-box" asp-page="Create">Request New Enrollment</a>
+    </p>
+} -->
+@if ( @Model.ProgramsAreAvailable )
+{
+    <!-- <p>You may now request enrollment into a program, view any current enrollments, or make edits to your enrollments. 
+    <br/>Click <a class="urs-link-box" style="padding:3px;" asp-page="Create">here</a> to request a new enrollment.
+    <br />You may view or edit previous enrollments by clicking on the appropriate link below.
+    </p> -->
+    <!-- <h5 style="margin-top:15px;margin-bottom:20px;">
+        <a class="urs-link-box" asp-page="Create">Request New Enrollment</a>
+    </h5> -->
+    <!-- <p>You may now request enrollment into a program, view any current enrollments, or make edits to your enrollments.</p>
+    <p style="font-weight:bold;">Click <a class="urs-link-box" style="padding:3px;" asp-page="Create">here</a> to request a new enrollment.</p>
+    <p>You may view or edit previous enrollments by clicking on the appropriate link below.</p> -->
+
+    <p>You may now request enrollment into a program, view any current enrollments, or make edits to your enrollments.</p>
+    <h5 style="margin-top:15px;margin-bottom:20px;">
+        <a class="urs-link-box" asp-page="Create">Request Enrollment</a>
+    </h5>
+    <!-- <p style="font-weight:bold;">Click <a class="urs-link-box" style="padding:3px;" asp-page="Create">here</a> to request a new enrollment.</p>    -->
+    <p>You may view or edit previous enrollments by clicking on the appropriate link below.</p>
+
+
+    
+}
+else 
+{
+   <p>You may view your current enrollments or make edits to your enrollments. 
+   <br />You may view or edit previous enrollments by clicking on the appropriate link below.
+   </p>   
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramEnrollment[0].LMSProgram)
+                </th>     
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramEnrollment[0].Student)
+                </th>             
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramEnrollment[0].Student.Agency.AgencyName)
+                </th>                      
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramEnrollment[0].EnrollmentStatus)
+                </th>                       
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramEnrollment[0].DateCreated)
+                </th>
+                <th>Available Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ProgramEnrollment) 
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LMSProgram.LongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.FullName)
+            </td>    
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Agency.AgencyName)
+            </td>                     
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentStatus.StatusLabel)
+            </td>                    
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                <a asp-page="./Details"  asp-route-id="@item.ProgramEnrollmentID">View Details</a>
+                @if ( item.StatusCode == @Model.WITHDRAWN || item.StatusCode == @Model.DENIED || item.StatusCode == @Model.REVOKED)
+                {
+                    <span> | </span>
+                    <a asp-page="./Reenroll"  asp-route-id="@item.ProgramEnrollmentID">Re-enroll</a>
+                }                
+                @if ( item.StatusCode == @Model.PENDING || item.StatusCode == @Model.APPROVED)
+                {
+                    <span> | </span>
+                    <a asp-page="./Withdraw"  asp-route-id="@item.ProgramEnrollmentID">Withdraw</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,68 @@
+#########################################################################################
+# Citrix DTDv5-3
+#########################################################################################
+set APPSETTINGS_DIRECTORY=E:\Developers\LeeT\Projects\MyProjects\URS\AppSettings
+set LOGFILE_DIRECTORY=D:\Users\LTTrent\Dev\Projects\MyProjects\LMS\Logs
+
+echo %APPSETTINGS_DIRECTORY%
+echo %LOGFILE_DIRECTORY%
+
+#########################################################################################
+# Lee's Win10 (Windows CMD)
+#########################################################################################
+# DEV
+set APPSETTINGS_DIRECTORY=D:\Users\LTTrent\Dev\Projects\MyProjects\LMS\AppSettings
+set LOGFILE_DIRECTORY=D:\Users\LTTrent\Dev\Projects\MyProjects\LMS\Logs
+
+echo %APPSETTINGS_DIRECTORY%
+echo %LOGFILE_DIRECTORY%
+
+set http_proxy=http://159.142.110.243:3128
+set https_proxy=https://159.142.110.243:3128
+
+echo %APPSETTINGS_DIRECTORY%
+echo %LOGFILE_DIRECTORY%
+echo %http_proxy%
+echo %https_proxy%
+
+
+# TEST
+set APPSETTINGS_DIRECTORY=C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Test
+set LOGFILE_DIRECTORY=C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Test
+
+# TEST-localhost
+set APPSETTINGS_DIRECTORY=C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Test-localhost
+set LOGFILE_DIRECTORY=C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Test-localhost
+
+# PROD-localhost
+set APPSETTINGS_DIRECTORY=C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Prod-localhost
+set LOGFILE_DIRECTORY=C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Prod-localhost
+
+
+
+#########################################################################################
+# Lee's Win10 (Windows Powershell ISE)
+#########################################################################################
+Set-Variable -Name "APPSETTINGS_DIRECTORY" -Value "C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Dev"
+Set-Variable -Name "LOGFILE_DIRECTORY" -Value "C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Dev"
+
+$env:APPSETTINGS_DIRECTORY = "C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Dev"
+$env:LOGFILE_DIRECTORY = "C:\Users\LTTrent\Dev\ELMS-URS\AppSettings\Dev"
+
+###############################################################################################
+# Test Environment Variables(Mac & Linux):
+###############################################################################################
+echo $APPSETTINGS_DIRECTORY
+echo $LOGFILE_DIRECTORY
+
+#########################################################################################
+# Test Environment Variables (Windows CMD)
+#########################################################################################
+echo %APPSETTINGS_DIRECTORY%
+echo %LOGFILE_DIRECTORY%
+
+#########################################################################################
+# Test Environment Variables (Windows Powershell ISE)
+#########################################################################################
+Get-Variable -Name "APPSETTINGS_DIRECTORY"
+Get-Variable -Name "LOGFILE_DIRECTORY"

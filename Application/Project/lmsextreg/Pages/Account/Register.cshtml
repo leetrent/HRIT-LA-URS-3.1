@@ -1,0 +1,160 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "User Registration";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4 style="margin-top:0">Create a new account</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" autocomplete="off">
+            <div asp-validation-summary="All" class="text-danger"></div>
+             <div class="required-field-block">
+                <input asp-for="Input.Email" class="form-control" style="margin-top:0" placeholder="Email address" autocomplete="off" />
+                <div class="required-icon"><div class="text">*</div></div>                
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div style="margin-top:10px;padding:10px;border: 1px dotted #000;">
+                    <p style="font-weight:bold;">Password Strength:</p>
+                    <ul>
+                        <li>Password must be at least 12 characters long</li>
+                        <li>Password must have at least one non-alphanumeric character</li>
+                        <li>Passwords must have at least one digit (0 - 9)</li>
+                        <li>Passwords must have at least one uppercase character (A - Z)</li>
+                        <li>Passwords must have at least one lowercase character (a - z)</li>
+                        <li>Passwords must use at least 6 different characters.</li>                                                                                           
+                    </ul>
+                </div> 
+            </div>
+            <div class="required-field-block">
+                <input asp-for="Input.Password" class="form-control" placeholder="Password"  autocomplete="off" />
+                <div class="required-icon"><div class="text">*</div></div>   
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="required-field-block">
+                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm password" autocomplete="off" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                <div class="required-icon"><div class="text">*</div></div>   
+            </div>
+             <div class="required-field-block">
+                <input asp-for="Input.FirstName" class="form-control" placeholder="First Name" autocomplete="off"/>
+                <div class="required-icon"><div class="text">*</div></div>                
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+                <input asp-for="Input.MiddleName" class="form-control" placeholder="Middle Name" autocomplete="off"/>
+                <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
+            </div>  
+             <div class="required-field-block">
+                <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" autocomplete="off" />
+                <div class="required-icon"><div class="text">*</div></div> 
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>    
+           <div class="required-field-block">
+                <input asp-for="Input.JobTitle" class="form-control" placeholder="Job Title" autocomplete="off" />
+                <div class="required-icon"><div class="text">*</div></div> 
+                <span asp-validation-for="Input.JobTitle" class="text-danger"></span>
+            </div>       
+            <div class="required-field-block" style="margin-top:10px;">
+                <select id="AgencySelectObj" asp-for="Input.AgencyID" class="form-control"
+                        asp-items="@Model.AgencySelectList">
+                    <option value="">-- Select Agency --</option>
+                </select>
+                <div class="required-icon" style="margin-right:17px;"><div class="text">*</div></div> 
+                <span asp-validation-for="Input.AgencyID" class="text-danger"></span>
+            </div>     
+            <div class="required-field-block" style="margin-top:10px;">
+                <select id="SubAgencySelectObj" asp-for="Input.SubAgencyID" class="form-control"
+                        asp-items="@Model.SubAgencySelectList">
+                    <option value="">-- Select SubAgency --</option>
+                </select>
+                <div class="required-icon" style="margin-right:17.5px;"><div class="text">*</div></div> 
+                <span asp-validation-for="Input.SubAgencyID" class="text-danger"></span>
+            </div>  
+            <div class="form-group" style="margin-bottom:0;">
+                <div style="margin-top:10px;padding:10px;border: 1px dotted #000;border-bottom:none;">
+                    <p style="text-align:center;font-weight:bold;">Rules of Behavior</p>
+                    <p>This is a U.S. General Services Administration Federal Government computer system that is FOR OFFICIAL USE ONLY. This system is subject to monitoring. Therefore, no expectation of privacy is to be assumed. Individuals found performing unauthorized activities are subject to disciplinary action including criminal prosecution.</p>
+                </div> 
+            </div>
+            <div class="required-field-block" style="margin-top:0;padding:10px;border: 1px dotted #000;"> 
+                <input asp-for="Input.RulesOfBehaviorAgreedTo" />
+                <label asp-for="Input.RulesOfBehaviorAgreedTo"></label>
+                <div class="required-icon"><div class="text">*</div></div> 
+                <br/>
+                <span asp-validation-for="Input.RulesOfBehaviorAgreedTo" class="text-danger"></span>
+            </div>    
+            <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey='@ViewData["ReCaptchaKey"]'></div>
+            <button type="submit" id="lmsRegisterButton" class="btn btn-primary" disabled>Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <!-- <script>
+        $(document).ready(function() {
+            $("#SubAgencySelectObj").prop("disabled", true);
+        });    
+    </script> -->
+    <script>
+        $(function() {
+            $("#AgencySelectObj").change(function() {   
+                var selectedAgencyVal = $("#AgencySelectObj").val();
+                var subAgencySelectObj = $('#SubAgencySelectObj');
+                subAgencySelectObj.empty();
+                if (selectedAgencyVal != null && selectedAgencyVal != '') {
+                     $.ajax({
+                        type: 'GET',
+                        url: '/Account/Register?handler=SubAgenciesInAgency',
+                        contentType: "applications/json",
+                        data: {
+                            agyID: selectedAgencyVal
+                        },
+                        success: function(data) {
+                            $("#SubAgencySelectObj").prop("disabled", false);
+                            subAgencySelectObj.append('<option value="">' + '-- Select SubAgency --' + '</option>');
+                            $.each(data, function(idx, subAgency) {
+                                subAgencySelectObj.append('<option value="' + subAgency.value + '">' + subAgency.text + '</option>');
+                            });
+                        },
+                        error: function(excErr) {
+                            alert("error");
+                            console.log("AJAX error retrieving sub-agencies: ");
+                            console.log(excErr);
+                            console.log("selectedAgencyVal: ")
+                            console.log(selectedAgencyVal);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        // extend range validator method to treat checkboxes differently
+        var defaultRangeValidator = $.validator.methods.range;
+        $.validator.methods.range = function(value, element, param) {
+            if(element.type === 'checkbox') {
+                // if it's a checkbox return true if it is checked
+                return element.checked;
+            } else {
+                // otherwise run the default validation function
+                return defaultRangeValidator.call(this, value, element, param);
+            }
+        }
+    </script>
+    <script>
+        $(function() {
+            $('.required-icon').tooltip({
+                placement: 'left',
+                title: 'Required field'
+                });
+        });
+    </script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        function recaptchaCallback() { $('#lmsRegisterButton').removeAttr('disabled'); };
+    </script>    
+}

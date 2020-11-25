@@ -1,0 +1,164 @@
+@page
+@model lmsextreg.Pages.Approvals.IndexModel
+@using lmsextreg.Constants;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center" style="margin-bottom:2px;">@Model.ProgramName</h3>
+<h4 class="text-center" style="margin-top:2px;">Programs Enrollments</h4>
+
+<!-- Button trigger modal -->
+<button type="button" id="commentNotificationModalButton" style="display:none" class=".d-none" data-toggle="modal" data-target="#commentNotificationModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal show" id="commentNotificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">@ViewData[ApproverConstants.STATUS_CHANGE_MODAL_TITLE]</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        @ViewData[ApproverConstants.STATUS_CHANGE_MODAL_TEXT]
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<h5>Enrollment Status Breakdown:</h5>
+<div id="StatusBreakdownContainer" class="container">
+    <div class="row">
+        @foreach (var statusCountItem in Model.EnrollmentStatusCounts)
+        {
+            <div class="col border bg-light">
+                @Html.DisplayFor(modelItem => statusCountItem.StatusLabel)
+            </div>    
+        }
+        <div class="w-100"></div>
+        @foreach (var statusCountItem in Model.EnrollmentStatusCounts)
+        {
+            <div class="col border">
+                @Html.DisplayFor(modelItem => statusCountItem.StatusCount)
+            </div>    
+        }
+    </div>
+</div>
+
+<div class="card w-25 mx-auto mt-4 bg-light">
+  <div class="card-body pt-2">
+    <form method="post">
+        <label for="StatusCode">Filter by Enrollment Status:</label>
+        <select id="StatusCode" asp-for="Input.StatusCode" class="form-control" asp-items="@Model.StatusSelectList" onchange="this.form.submit();">
+            <option value="">-- Filter by Status --</option>
+        </select>
+    </form>
+  </div>
+</div>
+
+<!-- <label for="FilteredEnrollmentRequests" class="font-weight-bold mt-3">Filtered Enrollment Requests:</label> -->
+<h5>Filtered Enrollment Requests:</h5>
+<table id="FilteredEnrollmentRequests" class="table">
+    <thead>
+        <tr>
+            <th class="border bg-light" style="color:#004f87;">
+                @Html.DisplayNameFor(model => model.ProgramEnrollment[0].LMSProgram)
+            </th>     
+            <th class="border bg-light" style="color:#004f87;">
+                @Html.DisplayNameFor(model => model.ProgramEnrollment[0].Student.FullName)
+            </th>   
+           <th class="border bg-light" style="color:#004f87;">
+                @Html.DisplayNameFor(model => model.ProgramEnrollment[0].Student.Agency.AgencyName)
+            </th>                              
+            <th class="border bg-light" style="color:#004f87;">
+                @Html.DisplayNameFor(model => model.ProgramEnrollment[0].EnrollmentStatus)
+            </th>   
+            <th class="border bg-light" style="color:#004f87;">
+                @Html.DisplayNameFor(model => model.ProgramEnrollment[0].Approver)
+            </th>                                
+            <th class="border bg-light" style="color:#004f87;">
+                @Html.DisplayNameFor(model => model.ProgramEnrollment[0].DateCreated)
+            </th>
+            <th class="border bg-light" style="color:#004f87;">Available Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProgramEnrollment) 
+        {
+            <tr>
+                <td class="border">
+                    @Html.DisplayFor(modelItem => item.LMSProgram.LongName)
+                </td>
+                <td class="border">
+                    @Html.DisplayFor(modelItem => item.Student.FullName)
+                </td>  
+                <td class="border">
+                    @Html.DisplayFor(modelItem => item.Student.Agency.AgencyName)
+                </td>                             
+                <td class="border">
+                    @Html.DisplayFor(modelItem => item.EnrollmentStatus.StatusLabel)
+                </td> 
+                <td class="border">
+                    @Html.DisplayFor(modelItem => item.Approver.FullName)
+                </td>                                    
+                <td class="border">
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td class="border">
+                    @if ( item.StatusCode == @Model.PENDING)
+                    {
+                        <a asp-page="./Review"  asp-route-id="@item.ProgramEnrollmentID">Review</a>
+                        @(" | ")
+                        <a asp-page="./Review"  asp-route-id="@item.ProgramEnrollmentID">Approve/Deny</a>
+                    }
+                    @if ( item.StatusCode == @Model.APPROVED )
+                    {
+                        <a asp-page="./Review"  asp-route-id="@item.ProgramEnrollmentID">Review</a>
+                        @(" | ")
+                        <a asp-page="./Review"  asp-route-id="@item.ProgramEnrollmentID">Revoke</a>
+                    }                                         
+                    @if ( item.StatusCode == @Model.DENIED)
+                    {
+                        <a asp-page="./Review"  asp-route-id="@item.ProgramEnrollmentID">Review</a>
+                        @(" | ")
+                        <a asp-page="./Review"  asp-route-id="@item.ProgramEnrollmentID">Approve</a>
+                    }
+                    @if ( item.StatusCode == @Model.WITHDRAWN || item.StatusCode == @Model.REVOKED )
+                    {
+                        <a asp-page="./Review"  asp-route-id="@item.ProgramEnrollmentID">Review</a>
+                    }  
+                </td>
+            </tr>
+        }
+    </tbody> 
+</table>
+
+@section Scripts {
+    @{
+        string modalTitle = (string)@ViewData[ApproverConstants.STATUS_CHANGE_MODAL_TITLE];
+        string modalText  = (string)@ViewData[ApproverConstants.STATUS_CHANGE_MODAL_TEXT];
+
+        if (String.IsNullOrEmpty(modalTitle) == false 
+                && String.IsNullOrWhiteSpace(modalTitle) == false
+                && String.IsNullOrEmpty(modalText) == false
+                && String.IsNullOrWhiteSpace(modalText) == false)
+        {
+            <script>
+                $(document).ready(function(){
+                    $("#commentNotificationModalButton").click();
+                });
+            </script>
+        }
+    }   
+}

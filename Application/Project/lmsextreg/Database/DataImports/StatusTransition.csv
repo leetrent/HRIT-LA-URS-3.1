@@ -1,0 +1,6 @@
+1,NONE,PENDING,NONE_TO_PENDING,Initial enrollment request
+2,PENDING,WITHDRAWN,PENDING_TO_WITHDRAWN,Applicant withdrew enrollment request
+3,PENDING,APPROVED,PENDING_TO_APPROVED,Enrollment request has been approved
+4,PENDING,DENIED,PENDING_TO_DENIED,Enrollment request has been denied
+5,APPROVED,REVOKED,APPROVED_TO_REVOKED,Program enrollment has been revoked
+6,DENIED,APPROVED,DENIED_TO_APPROVED,Enrollment request has been approved

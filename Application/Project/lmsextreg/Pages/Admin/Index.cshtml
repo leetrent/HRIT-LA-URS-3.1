@@ -1,0 +1,47 @@
+@page
+@model lmsextreg.Pages.Admin.IndexModel
+
+<h1 class="h2 text-center">User Admin</h1>
+
+<form method="post">
+    <div class="form-row w-50 mb-3">
+        <div class="col">
+            <input type="email" asp-for="Input.EmailAddress" class="form-control" placeholder="email@email.com">
+        </div>
+        <div class="col">
+            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-primary ml-2" type="submit">Retrieve All</button>
+        </div>
+    </div>
+</form>
+
+@if (Model.Users == null || Model.Users.Count == 0)
+{
+    <p class="h5">No data found.</p>
+}
+else
+{
+    <div class="container" style="border: 1px solid #004085;">
+        <div class="row alert-primary" style="border-bottom: 1px solid #004085;">
+            <div class="col  p-1 font-weight-bold text-center">Email Address</div>
+            <div class="col  p-1 font-weight-bold text-center" style="border-left: 1px solid #004085;">First Name</div>
+            <div class="col  p-1 font-weight-bold text-center" style="border-left: 1px solid #004085;">Last Name</div>
+            <div class="col  p-1 font-weight-bold text-center" style="border-left: 1px solid #004085;">Date Registered</div>
+            <div class="col  p-1 font-weight-bold text-center" style="border-left: 1px solid #004085;">Email Confirmed?</div>
+            <div class="col  p-1 font-weight-bold text-center" style="border-left: 1px solid #004085;">Two Factor Enabled?</div>
+        </div>
+        @foreach (var user in Model.Users)
+        {
+            <div class="row">
+                <div class="col border p-1">
+                    <a asp-page="./Update" asp-route-UserId="@user.Id">@user.Email</a>
+                </div>
+                <div class="col border p-1">@user.FirstName</div>
+                <div class="col border p-1">@user.LastName</div>
+                <div class="col border p-1">@user.DateRegistered</div>
+                <div class="col border p-1">@user.EmailConfirmed</div>
+                <div class="col border p-1">@user.TwoFactorEnabled</div>
+            </div>
+        }
+    </div>
+}

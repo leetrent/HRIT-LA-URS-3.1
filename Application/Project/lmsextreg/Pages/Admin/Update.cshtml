@@ -1,0 +1,136 @@
+@page
+@model lmsextreg.Pages.Admin.UpdateModel
+<!-- Button trigger modal -->
+<button type="button" id="userAccountModalButton" style="display:none" class=".d-none" data-toggle="modal" data-target="#userAccountModal"></button>
+
+<!-- Modal -->
+<div class="modal show" id="userAccountModal" tabindex="-1" role="dialog" aria-labelledby="userAccountModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="userAccountModalTitle">TITLE GOES HERE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="userAccountModelBody" class="modal-body">TEXT GOES HERE</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<h1 class="text-center text-dark">@Model.AppUser.FirstMiddleLastName</h1>
+<div class="container w-75">
+    <table class="table table-bordered mx-auto">
+        <thead>
+            <tr class="bg-light">
+                <th colspan="2">First Name:</th>
+                <th colspan="2">Middle Name:</th>
+                <th colspan="2">Last Name:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">@Model.AppUser.FirstName</td>
+                <td colspan="2">@Model.AppUser.MiddleName</td>
+                <td colspan="2">@Model.AppUser.LastName</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr class="bg-light">
+                <th colspan="3">Email Address:</th>
+                <th colspan="3">Job Title:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">@Model.AppUser.Email</td>
+                <td colspan="3">@Model.AppUser.JobTitle</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr class="bg-light">
+                <th colspan="3">Agency:</th>
+                <th colspan="3">Sub-Agency:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">@Model.AppUser.SubAgency.Agency.AgencyName</td>
+                <td colspan="3">@Model.AppUser.SubAgency.SubAgencyName</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr class="bg-light">
+                <th colspan="2">Date Registered:</th>
+                <th colspan="2">Date Account Expires:</th>
+                <th colspan="2">Date Password Expires:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">@Model.AppUser.DateRegistered</td>
+                <td colspan="2">@Model.AppUser.DateAccountExpires</td>
+                <td colspan="2">@Model.AppUser.DatePasswordExpires</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr class="bg-light">
+                <th colspan="2">Account Locked:</th>
+                <th colspan="2">Email Confirmed:</th>
+                <th colspan="2">Two Factor Enabled:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" id="userIsLockedOut">@Model.AppUser.IsLockedOut</td>
+                <td colspan="2" id="emailAddressIsConfirmed">@Model.AppUser.EmailConfirmed</td>
+                <td colspan="2" id="twoFactorEnabled">@Model.AppUser.TwoFactorEnabled</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+@if (Model.AvailableActionCardViewModels != null && Model.AvailableActionCardViewModels.Count > 0)
+{
+    <div class="container w-75 mt-5">
+        <hr />
+        <h3 class="text-center">Available Actions</h3>
+        <hr class="mb-0" />
+        <div class="row mt-0">
+            @{
+                int count = 0;
+                foreach (lmsextreg.ViewModels.AvailableActionCardViewModel card in Model.AvailableActionCardViewModels)
+                {
+                    if (count++ % 2 == 0)
+                    {
+                    @:</div><div class="row my-4">
+                    }
+
+                    <div class="col-sm-6">
+                        <div id="@card.CardId" class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@card.Title</h5>
+                                <p class="card-text">@card.Text</p>
+                                <form action="javascript:void(0);" method="POST" onsubmit="@card.OnSubmit">
+                                    <input id="@card.ButtonId" type="submit" class="btn btn-primary" value="@card.ButtonLabel" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            }
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/js/user_account_lock.js"></script>
+    <script src="~/js/user_confirm_email.js"></script>
+    <script src="~/js/user_two_factor_auth.js"></script>
+}

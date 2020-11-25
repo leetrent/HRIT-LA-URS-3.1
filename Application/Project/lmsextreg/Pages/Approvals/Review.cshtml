@@ -1,0 +1,99 @@
+@page "{id:int}"
+@model lmsextreg.Pages.Approvals.ReviewModel
+
+@{
+    ViewData["Title"] = "Approvals";
+}
+<h2>@Html.DisplayFor(model => model.ProgramEnrollment.LMSProgram.LongName)</h2>
+<h4>Enrollment Application Details</h4>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-2 detailsDT">Applicant's Name:</dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgramEnrollment.Student.FullName)
+        </dd>
+        <dt class="col-sm-2 detailsDT">Email Address:</dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgramEnrollment.Student.UserName)
+        </dd>
+        <dt class="col-sm-2 detailsDT">Agency:</dt>   
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgramEnrollment.Student.Agency.AgencyName)
+        </dd>    
+        <dt class="col-sm-2 detailsDT">Sub-Agency:</dt>   
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgramEnrollment.Student.SubAgency.SubAgencyName)
+        </dd>     
+        <dt class="col-sm-2 detailsDT">Job Title:</dt>   
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgramEnrollment.Student.JobTitle)
+        </dd>  
+        <dt class="col-sm-2 detailsDT">Program Name:</dt>  
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgramEnrollment.LMSProgram.LongName)
+        </dd>        
+        <dt class="col-sm-2 detailsDT">Enrollment Status:</dt>   
+        <dd class="col-sm-10">
+            <span style="border: 2px solid red;padding:2px;font-weight:bold;">@Html.DisplayFor(model => model.ProgramEnrollment.EnrollmentStatus.StatusLabel)</span>
+        </dd>     
+        <dt class="col-sm-2 detailsDT">Enrollment History:</dt>   
+        <dd class="col-sm-10">
+            <table class="table table-bordered table-striped table-sm" style="width=50%;margin-bottom:0px;">
+                <thead>
+                    <tr style="color:#FFF;background-color:#A9A9A9">
+                        <td>Who</td>
+                        <td>What</td>
+                        <td>When</td>
+                        <td>Remarks</td>
+                    </tr> 
+                </thead> 
+                <tbody>
+                    @foreach (var item in Model.EnrollmentHistory) 
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Actor.FullName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.StatusTransition.TransitionLabel)</td>                            
+                            <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ActorRemarks)</td> 
+                        </tr>
+                    }                    
+                </tbody>
+            </table>      
+        </dd>                                       
+    </dl>   
+</div>
+@if ( @Model.ShowReviewForm )
+{
+    <form method="post">
+        <input type="hidden" name="id" value="@Model.ProgramEnrollment.ProgramEnrollmentID" />
+       <div style="width:40%"   >
+             <div class="form-group">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <label asp-for="Input.Remarks"></label>:
+                <textarea asp-for="Input.Remarks" id="ApproverRemarks" class="form-control" style="margin-top:0px;" rows="3" cols="40"></textarea>
+            </div>
+            <div class="form-group">
+                @if ( @Model.ShowApproveButton )
+                {
+                    <input type="submit" class="btn btn-xs btn-success" style="margin-top:0px;" asp-page-handler="Approve" value="Approve" />
+                }
+                @if ( @Model.ShowDenyButton )
+                {
+                    <input type="submit" class="btn btn-xs btn-danger" style="margin-top:0px;" asp-page-handler="Deny" value="Deny" />
+                }
+                @if ( @Model.ShowRevokeButton )
+                {
+                    <input type="submit" class="btn btn-xs btn-danger" style="margin-top:0px;" asp-page-handler="Revoke" value="Revoke" />
+                }
+            </div>
+       </div>  
+    </form>
+}
+<div class="form-group">   
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

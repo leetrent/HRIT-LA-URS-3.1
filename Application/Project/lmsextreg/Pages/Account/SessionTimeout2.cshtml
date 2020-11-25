@@ -1,0 +1,13 @@
+@page
+@model SessionTimeout2Model
+@{
+    ViewData["Title"] = "Session Timeout";
+}
+
+<header>
+    <h1>@ViewData["Title"]</h1>
+    <p>Your session has timed-out. </p>
+    <p class="h4 urs-instructions">            
+        <a class="h4 urs-link-box" asp-page="/Account/Login">Log-in</a> 
+    </p>
+</header>

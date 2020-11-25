@@ -1,0 +1,53 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model ShowRecoveryCodesModel
+@{
+    ViewData["Title"] = "Recovery codes";
+    ViewData["ActivePage"] = "TwoFactorAuthentication";
+}
+
+<h4>@ViewData["Title"]</h4>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>Put these codes in a safe place.</strong>
+    </p>
+    <p>
+        If you lose your device and don't have the recovery codes you will lose access to your account.
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @for (var row = 0; row < Model.RecoveryCodes.Length; row += 2)
+        {
+            <code>@Model.RecoveryCodes[row]</code><text>&nbsp;</text><code>@Model.RecoveryCodes[row + 1]</code><br />
+        }
+    </div>
+</div>
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "CanAccessStudentLink")).Succeeded)
+{
+    <p>&nbsp;</p>
+    <!-- <div class="alert alert-info" role="alert">
+        <p class="h3 text-info">
+            Students and future students: <a class="h4 text-primary" style="padding:5px; border: 1px solid #007bff;" asp-page="/Enrollments/Index">Click Here!</a>
+        </p>         
+    </div>    -->
+    <div class="row">
+        <p class="h3 urs-instructions">Students and future students: <a class="h4 urs-link-box" asp-page="/Enrollments/Index">Click Here!</a></p>  
+    </div>
+}  
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "CanAccessApproverLink")).Succeeded)
+{
+    <p>&nbsp;</p>
+    <!-- <div class="alert alert-info" role="alert">
+        <p class="h3 text-info">
+            Enrollment Approvers: <a class="h4 text-primary" style="padding:5px; border: 1px solid #007bff;" asp-page="/Approvals/Index">Click Here!</a>
+        </p>  
+    </div>         -->
+    <div class="row">
+        <p class="h3 urs-instructions">Enrollment Approvers: <a class="h4 urs-link-box" asp-page="/Approvals/Index">Click Here!</a></p>  
+    </div>
+}  
